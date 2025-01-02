@@ -4,12 +4,12 @@ A command-line calculator and expression parser written in C++ that supports com
 
 ## Building the Project
 
+This project requires C++17 or above due to the use of features like `std::optional` and `std::string_view`.    
 To compile the project, use:
 ```bash
-g++ -I include src/*.cpp
+g++ -std=c++17 -I include src/*.cpp
 ```
-
-Run the resulting executable to start the calculator.
+The `-std=c++17` flag is required to enable C++17 features. Run the resulting executable to start the calculator.
 
 ## Features
 
@@ -126,4 +126,5 @@ The parser includes error handling for:
 - Invalid function arguments
 - Malformed expressions
 
-If an error occurs, an appropriate error message will be displayed, and the calculator will continue running. Working on more features and a better GUI. If you have recommendations, pm me, add issue or fork this and add your idea.
+If an error occurs, an appropriate error message will be displayed, and the calculator will continue running.  
+Working on more features and a better GUI. If you have recommendations, pm me, add issue or fork this and add your idea.
