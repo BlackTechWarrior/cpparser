@@ -126,5 +126,4 @@ The parser includes error handling for:
 - Invalid function arguments
 - Malformed expressions
 
-If an error occurs, an appropriate error message will be displayed, and the calculator will continue running. To exit, type "exit".
-Working on more features and a better GUI. If you got recommendations, pm me, add issue or fork this and add your idea.
+If an error occurs, an appropriate error message will be displayed, and the calculator will continue running. Working on more features and a better GUI. If you have recommendations, pm me, add issue or fork this and add your idea.
