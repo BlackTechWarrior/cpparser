@@ -95,8 +95,8 @@ namespace calc {
         size_t idx = 0;
         bool hasDecimal = false; 
 
-        if (input.front() == '-' && input.length() > 1) {
-            idx++;
+        if (input.front() == '-') {
+            return std::nullopt;
         }
 
         while (idx < input.length() &&
