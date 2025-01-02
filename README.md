@@ -21,7 +21,7 @@ The following mathematical constants are built-in:
 - `sqrt2` - Square root of 2 (1.41421...)
 
 ### Mathematical Functions
-All functions require brackets for proper parsing. Singular values, variables should work fine both ways:
+All functions require brackets for proper parsing:
 - `sin(x)` - Sine (in degrees)
 - `cos(x)` - Cosine (in degrees)
 - `tan(x)` - Tangent (in degrees)
