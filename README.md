@@ -1,6 +1,6 @@
 # Mathematical Expression Parser
 
-A command-line calculator and expression parser written in C++ that supports complex mathematical operations, variable management, and command history.
+A C++ command-line calculator that leverages the shunting-yard algorithm for evaluating complex mathematical expressions, featuring variable storage and command history.
 
 ## Building the Project
 
@@ -90,7 +90,7 @@ upd x ans  # Updates x to the last calculated result
    sin 60/2     # Evaluates as (sin 60)/2 = 0.433, not sin(60/2)
    sin(60/2)    # Use brackets for expressions
    ```
-
+   
 3. The special variable `ans` always contains the result of the last calculation.
 
 ## Examples
