@@ -18,18 +18,20 @@ namespace calc {
             continue;
         }
 
-        // Handle negative numbers
+        // Handle neg numbers
         if(c == '-' && remaining.length() > 1 && 
            (std::isdigit(remaining[1]) || remaining[1] == '.') &&
            (tokens.empty() || tokens.back().getType() == Token::Type::Operator ||
            (tokens.back().getType() == Token::Type::Bracket && tokens.back().getValue() == "("))) {
+            remaining.remove_prefix(1);
             if (auto numToken = parseNumber(remaining)) {
-                tokens.emplace_back(std::move(*numToken));
+                tokens.emplace_back(Token::Type::Number, "-" + numToken->getValue());
                 continue;
             }
+            remaining = std::string_view(remaining.data() - 1, remaining.length() + 1);
         }
 
-        // Handle numbers
+        // Handle pos numbers
         if (auto numToken = parseNumber(remaining)) {
             if (!tokens.empty() && tokens.back().getType() == Token::Type::Bracket && 
                 tokens.back().getValue() == ")") {
@@ -95,17 +97,13 @@ namespace calc {
         size_t idx = 0;
         bool hasDecimal = false; 
 
-        if (input.front() == '-') {
-            return std::nullopt;
-        }
-
         while (idx < input.length() &&
             (std::isdigit(input[idx]) || (!hasDecimal && input[idx] == '.'))) {
                 if (input[idx] == '.') hasDecimal = true;
                 idx++;
         }
 
-        if (idx == 0 || (idx == 1 && input.front() == '-')) {
+        if (idx == 0) {
             return std::nullopt;
         }
 
