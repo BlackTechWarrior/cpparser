@@ -41,6 +41,7 @@ The parser supports implicit multiplication in various forms:
 - `-(2)` evaluates to `-2`
 - `(2)(3)` evaluates to `6`
 - `4(2-3)` evaluates to `-4`
+- `(2-3)4` similarly evaluates to `-4`
 
 ### Variable Management
 
@@ -70,7 +71,7 @@ upd x ans  # Updates x to the last calculated result
 - `ls hist` - Show calculation history
 
 #### Deletion Commands
-- `del var` - Delete a specific variable
+- `del [variable_name]` - Delete a specific variable
 - `del vars` - Delete all variables
 - `del hist` - Clear calculation history
 
@@ -105,13 +106,13 @@ log(100)      # Returns 2
 # Variable operations
 def radius 5
 pi * radius ^ 2  # Calculate area
-def area ans # saves computed value to area
-ls vars       # Shows radius & area variables
+def area ans     # saves computed value to area
+ls vars          # Shows radius & area variables
 
 # Updating variables
-upd radius 10   # Updates radius
-pi * radius ^ 2 #find new area
-upd area ans #area takes new value, quite tedious (trying to add a feature to simplify it)
+upd radius 10    # Updates radius
+pi * radius ^ 2  #find new area
+upd area ans     #area takes new value
 
 # Implicit multiplication
 2(3+4)        # Returns 14
