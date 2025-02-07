@@ -4,6 +4,18 @@
 #include <algorithm>
 
 namespace calc {
+
+    void checkImplicit(std::vector<Token> &tokens){
+        if (!tokens.empty() && 
+            (tokens.back().getType() == Token::Type::Number || 
+             tokens.back().getType() == Token::Type::Constant ||
+             tokens.back().getType() == Token::Type::Variable ||
+             tokens.back().getType() == Token::Type::PrevResult ||
+             tokens.back().getType() == Token::Type::Bracket && tokens.back().getValue() == ")")) {
+            tokens.emplace_back(Token::Type::Operator, "*");
+        }
+    }
+
     std::vector<Token> TokenProcessor::tokenize(std::string_view expression) {
     std::vector<Token> tokens;
     tokens.reserve(expression.length() / 2);
@@ -62,6 +74,21 @@ namespace calc {
                 remaining.remove_prefix(1);
                 continue;
             }
+
+            if(c == '!){
+                tokens.emplace_back(Token::Type::Operator, std::string(1, c));
+                remaining.remove_prefix(1);
+
+                //peek ahead
+                if(!remaining.empty() && 
+                    (std::isalpha(remaining.front()) || 
+                    remaining.front() == '(' ||
+                    std::isdigit(remaining.front())))
+                {
+                    tokens.emplace_back(Token::Type::Operator, "*");
+                }
+                continue;
+            }
             tokens.emplace_back(Token::Type::Operator, std::string(1,c));
             remaining.remove_prefix(1);
             continue;
@@ -69,16 +96,7 @@ namespace calc {
 
         // Handle brackets
         if(c == '(' || c == ')') {  
-            if (!tokens.empty() && c == '(' && 
-               (tokens.back().getType() == Token::Type::Number || 
-                tokens.back().getType() == Token::Type::Constant || 
-                tokens.back().getType() == Token::Type::Variable ||
-                tokens.back().getType() == Token::Type::PrevResult ||
-                (tokens.back().getType() == Token::Type::Bracket && 
-                 tokens.back().getValue() == ")")
-               )) {
-                tokens.emplace_back(Token::Type::Operator, "*");
-            }
+            if (c == '(') checkImplicit(tokens);
             tokens.emplace_back(Token::Type::Bracket, std::string(1,c));
             remaining.remove_prefix(1);
             continue;
@@ -125,13 +143,16 @@ namespace calc {
         Token::Type type;
         if (word == "pi" || word == "e" || word == "phi" || word == "sqrt2") 
             type = Token::Type::Constant;
+            checkImplicit(tokens);
         else if(word == "ans") 
             type = Token::Type::PrevResult;
+            checkImplicit(tokens);
         else if (word == "def" || word == "del" || word == "upd" || word == "ls") 
             type = Token::Type::Command;
         else if (word == "sin" || word == "cos" || word == "tan" || 
                  word == "log" || word == "ln" || word == "sqrt") 
             type = Token::Type::MathFunction;
+            checkImplicit(tokens);
         else 
             type = Token::Type::Variable;
 
