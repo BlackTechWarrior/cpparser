@@ -1,0 +1,142 @@
+SIMPLE FUNCTIONS:
+create func add(a, b): a + b
+create func subtract(a, b): a - b
+create func multiply(a, b): a * b
+create func divide(a, b): a / b
+create func power(a, n): a ^ n
+create func square(x): x ^ 2
+create func cube(x): x ^ 3
+create func mod(a, b): a % b
+create func average(a, b): (a + b) / 2
+
+Note: here it uses 2 variables but for most of these cases, you can have more than that
+
+ADVANCED MATH FUNCTIONS:
+create func factorial(n): n!
+create func binomial(n, k): n! / (k! * (n-k)!)
+create func sinh(x): (e^x - e^(-x)) / 2
+create func cosh(x): (e^x + e^(-x)) / 2
+create func tanh(x): ((e^x - e^(-x)) / 2) / ((e^x + e^(-x)) / 2) 
+//currently, calscript doesn't support function nesting, elsewise, you'll need to explicitly declare the function
+
+create func arcsin_degrees(x): (180/pi) * ln(x + sqrt(1 - x^2))
+create func arccos_degrees(x): (180/pi) * ln(x + sqrt(x^2 - 1))
+create func arctan_degrees(x): (180/pi) * ln((1 + x) / (1 - x)) / 2
+create func logistic(x): 1 / (1 + e^(-x))
+create func softplus(x): ln(1 + e^x)
+create func stirling_approx(n): sqrt(2*pi*n) * (n/e)^n
+create func root(x, n): x ^ (1/n) 
+create func log_base(x, base): ln(x) / ln(base)
+
+GEOMETRY FUNCTIONS:
+create func circle_area(r): pi * r^2
+create func circle_circumference(r): 2(pi(r))
+create func sphere_volume(r): (4/3) * pi * r^3
+create func sphere_surface(r): 4 * pi * r^2
+create func cube_volume(side): side^3
+create func cube_surface(side): 6 * side^2
+create func cylinder_volume(r, h): pi * r^2 * h
+create func cylinder_surface(r, h): 2*pi*r*h + 2*pi*r^2
+create func cone_volume(r, h): (1/3) * pi * r^2 * h
+create func cone_surface(r, h): pi * r * (r + sqrt(h^2 + r^2))
+create func triangle_area(b, h): 0.5 * b * h
+create func triangle_area_sides(a, b, c, s): sqrt(s*(s-a)*(s-b)*(s-c)) 
+//whereby s=(a+b+c)/2 = constant value
+//example of how to call: triangle_area_sides(3,4,5,((3+4+5)/2))
+
+create func regular_polygon_area(n, s): (n * s^2) / (4 * tan(180/n))
+create func distance(x1, y1, x2, y2): sqrt((x2-x1)^2 + (y2-y1)^2)
+create func rectangle_area(l, w): l * w
+create func rectangle_peri(l, w): 2(l+w)
+
+PHYSICS FUNCTIONS:
+create func kinetic_energy(m, v): 0.5 * m * v^2
+create func potential_energy(m, h, g): m * g * h //g is gravity, maybe this could be a constant?
+create func momentum(m, v): m * v
+create func force(m, a): m * a
+create func work(f, d): f * d
+create func power(w, t): w / t
+create func gravitation(m1, m2, r): 6.67430*10^-11 * m1 * m2 / r^2
+create func escape_velocity(m, r): sqrt(2 * 6.67430*10^-11 * m / r)
+create func pendulum_period(l, g): 2 * pi * sqrt(l / g)
+create func centripetal_force(m, v, r): m * v^2 / r
+create func ohms_law(v, r): v / r
+create func doppler_effect(f, v, c): f * (c / (c - v))
+create func relativistic_mass(m0, v, c): m0 / sqrt(1 - (v^2/c^2))
+create func time_dilation(t0, v, c): t0 / sqrt(1 - (v^2/c^2))
+create func lorentz_factor(v, c): 1 / sqrt(1 - (v^2/c^2))
+
+ENGINEERING AND CONVERSIONS FUNCTIONS:
+create func celsius_to_fahrenheit(c): (c * 9/5) + 32
+create func fahrenheit_to_celsius(f): (f - 32) * 5/9
+create func celsius_to_kelvin(c): c + 273.15
+create func miles_to_kilometers(m): m * 1.60934
+create func pounds_to_kilograms(lb): lb * 0.453592
+create func decibel(p, p0): 10 * log(p / p0)
+create func resistance_series(r1, r2): r1 + r2
+create func resistance_parallel(r1, r2): (r1 * r2) / (r1 + r2)
+create func capacitance_series(c1, c2): (c1 * c2) / (c1 + c2)
+create func capacitance_parallel(c1, c2): c1 + c2
+
+STATS & PROB FUNCTIONS:
+create func mean(a, b, c): (a + b + c) / 3
+//could be any length of values, divided by length
+
+create func variance(a, b, c, mean): ((a-mean)^2 + (b-mean)^2 + (c-mean)^2) / 3
+create func standard_deviation(variance): sqrt(variance)
+create func z_score(x, mean, std): (x - mean) / std
+create func normal_pdf(x, mean, std): (1/(std*sqrt(2*pi)))*e^(-0.5*((x-mean)/std)^2)
+create func normal_cdf_approx(z): 0.5 * (1 + tanh(sqrt(pi/8) * z))
+create func poisson_pmf(k, lambda): (lambda^k * e^(-lambda)) / k!
+create func geometric_mean(a, b): sqrt(a * b)
+create func harmonic_mean(a, b): 2 / (1/a + 1/b)
+create func coefficient_variation(std, mean): (std / mean) * 100
+create func correlation_coef(a, b, c, d): (a*d - b*c) / sqrt((a+b)*(c+d)*(a+c)*(b+d))
+create func beta_function(x, y): (x-1)! * (y-1)! / (x+y-1)!
+create func bayes_theorem(prior, likelihood, evidence): prior * likelihood / evidence
+create func info_entropy(p): -p * ln(p) - (1-p) * ln(1-p)
+
+FINANCE & ECON FUNCTIONS:
+Note: rate needs to be in decimal, calcscipt doesn't translate percentages - yet
+
+create func simple_interest(p, r, t): p * r * t
+create func compound_interest(p, r, t, n): p * (1 + r/n)^(n*t)
+create func future_value(pmt, r, n): pmt * ((1+r)^n - 1) / r
+create func present_value(fv, r, t): fv / (1+r)^t
+create func mortgage_payment(p, r, n): p * r * (1+r)^n / ((1+r)^n - 1)
+create func rule_of_72(r): 72 / (r * 100)
+create func annuity_pv(pmt, r, n): pmt * (1 - (1+r)^(-n)) / r
+create func roi(gain, cost): (gain - cost) / cost * 100
+create func inflation_adjust(p, rate, years): p / (1 + rate)^years
+create func purchasing_power(amount, inflation, years): amount * (1 - inflation)^years
+
+NUMERICAL METHODS & APPROX FUNCTIONS:
+create func sqrt_newton(x, iterations): 0.5*(x + 1) 
+//Would require iterations, simplified
+
+create func trapezoidal_rule(a, b, fa, fb): (b-a) * (fa + fb) / 2
+create func simpson_rule(a, b, fa, fm, fb): (b-a)/6 * (fa + 4*fm + fb)
+create func euler_method(f0, h, df): f0 + h * df
+create func taylor_sin(x): x - x^3/6 + x^5/120 - x^7/5040
+create func taylor_cos(x): 1 - x^2/2 + x^4/24 - x^6/720
+create func taylor_exp(x): 1 + x + x^2/2 + x^3/6 + x^4/24 + x^5/120
+create func secant_method(x0, x1, fx0, fx1): x1 - fx1 * (x1 - x0) / (fx1 - fx0)
+create func riemann_sum(a, b, n, fa, fb): (b-a)/n * (fa + fb) / 2
+create func monte_carlo_pi(n): 4 * (1 - 1/3 + 1/5 - 1/7 + ...) 
+//Simplified as 4 * (pi/4) = pi)
+
+ZERO PARAM FUNCTIONS:
+create func get_pi(): pi
+create func get_e(): e
+create func get_golden_ratio(): phi
+create func last_result(): ans
+create func sum_consts() : pi+e+golden_ratio
+
+//say we have some defined variables
+def radius = 5
+create func area_var_radius(): pi*(radius)^2
+
+def a 5
+def b a+1
+def c 2b
+create func sum_abc(): a+b+c //returns 5 + 6 + 12 = 23
