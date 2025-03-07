@@ -14,7 +14,10 @@ namespace calc {
                 Variable, 
                 Command, 
                 PrevResult,
-                MathFunction
+                MathFunction, 
+                Boolean,
+                Comma,         // For function parameters
+                Colon          // For function definition
             };
 
             Token (Type t, std::string v) : type_(t), value_(std::move(v)) {}
